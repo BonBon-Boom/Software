@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <!-- 创建数据表 -->
+    <!--创建管理员表 T_Admin -->
+    <class name="com.vanceinfo.school.hibernate.pojo.Admin" table="T_Admin">
+        <id name="id">
+        <generator class="native"/>
+        </id>
+        <property name="name"/> 
+        <property name="psw"/>
+        <property name="publicKey"/>
+    </class>
+
+
+
+
+    <!--创建院系表 T_Collage -->
+     <class name="com.vanceinfo.school.hibernate.pojo.Collage" table="T_Collage" lazy="true">
+        <id name="id">
+        <generator class="native"/>
+        </id>
+        <property name="name"/> 
+        <property name="content"/>
+        <set name="professions" inverse="true" cascade="all" lazy="false">     <!--注意加上inverse="true" cascade="all"，不然不能级联删除-->
+			<key column="collageid" />
+			<one-to-many class="com.vanceinfo.school.hibernate.pojo.Professions"/>
+		</set>
+    </class>
+    
+    
+    
+     <!--创建专业表 T_Professions -->
+     <class name="com.vanceinfo.school.hibernate.pojo.Professions" table="T_Professions" lazy="true">
+        <id name="id">
+        <generator class="native"/>
+        </id>
+        <property name="name"/>  
+        <many-to-one name="collage" column="collageid" />
+        <set name="classes" inverse="true" cascade="all" lazy="false">
+			<key column="professionsid"/>
+			<one-to-many class="com.vanceinfo.school.hibernate.pojo.Classes"/>
+		</set>
+    </class>
+    
+   
+   
+   
+    <!--创建班级表 T_Classes-->
+	<class name="com.vanceinfo.school.hibernate.pojo.Classes" table="T_Classes">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="classesNo"/>
+		<set name="students" inverse="true" cascade="all" lazy="false">
+			<key column="classesid"/>
+			<one-to-many class="com.vanceinfo.school.hibernate.pojo.Student"/>
+		</set>
+		<many-to-one name="professions" column="professionsid" />
+		
+		 
+	</class>
+	
+	
+	
+	
+	 <!--创建教师表 T_Teacher-->
+	<class name="com.vanceinfo.school.hibernate.pojo.Teacher" table="T_Teacher">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="name"/>
+		<property name="teacherNo"/>
+		<property name="psw"/>
+		<property name="born"/>
+		<property name="sex"/> 
+		<property name="tel"/>
+		<property name="email"/>
+		<property name="addr"/> 
+		<property name="certid"/>
+		<property name="politics"/>
+		<property name="position"/>
+		<property name="entertime"/>
+		<property name="publicKey"/> 
+		<property name="enCodeP_key"/>
+		<property name="isDeCode"/>   
+		<property name="content"/>  
+		<set name="course" inverse="true" cascade="all" lazy="false">
+			<key column="teacherid"/>
+			<one-to-many class="com.vanceinfo.school.hibernate.pojo.Course" />
+		</set>
+	</class>
+	
+	
+	
+	
+	
+	 <!--创建学生表 T_Student-->
+	<class name="com.vanceinfo.school.hibernate.pojo.Student" table="T_Student" lazy="true">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="name"/>
+		<property name="studentNo"/>
+		<property name="psw"/>
+		<property name="born"/>
+		<property name="sex"/> 
+		<property name="tel"/>
+		<property name="email"/>
+		<property name="addr"/>
+		<property name="hobby"/>
+		<property name="certid"/>
+		<property name="politics"/>
+		<property name="schooltime"/> 
+		<many-to-one name="classes" column="classesid" lazy="false" />
+		<set name="score" inverse="true" cascade="all" lazy="false"> 
+			<key column="studentid"/>
+			<one-to-many class="com.vanceinfo.school.hibernate.pojo.Score"/>
+		</set>
+		 
+	</class>
+	
+	
+	
+	<!-- 创建课程表 T_Course -->
+	<class name="com.vanceinfo.school.hibernate.pojo.Course" table="T_Course" lazy="true">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="name"/> 
+		<set name="score" inverse="true" cascade="all" lazy="false">
+			<key column="courseid" />
+			<one-to-many class="com.vanceinfo.school.hibernate.pojo.Score"/>
+		</set>
+		<many-to-one name="teacher" column="teacherid"  lazy="false"/>
+	</class>
+	
+	
+	<!-- 创建课表安排表T_CourseArrange -->
+	<class name="com.vanceinfo.school.hibernate.pojo.CourseArrange" table="T_CourseArrange">
+		<id name="id">
+			<generator class="native"/>
+		</id>
+		<property name="classesNo"/> 
+		<property name="courseName"/> 
+		<property name="dateTime"/> 
+		<property name="banci"/> 
+		<property name="content"/> 
+	</class>
+	
+	
+	
+	<!-- 创建分数表 T-Score -->
+	<class name="com.vanceinfo.school.hibernate.pojo.Score" table="T_Score" lazy="true">
+	   
+	  <composite-id>
+	  <key-many-to-one name="student" column="studentid" lazy="false"/>
+	  <key-many-to-one name="course" column="courseid" lazy="false"/>
+	  </composite-id>
+	  <property name="score"/> 
+	  <property name="state"/> 
+	  <property name="enScore"/> 
+	</class>
+	
+	
+	 <!--创建公告表 T_Notice -->
+    <class name="com.vanceinfo.school.hibernate.pojo.Notice" table="T_Notice">
+        <id name="id">
+        <generator class="native"/>
+        </id>
+        <property name="title"/>
+        <property name="content"/>  
+    </class>
+	
+	
+	
+	 
+</hibernate-mapping>

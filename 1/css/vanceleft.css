@@ -1,0 +1,64 @@
+
+TABLE {
+	FONT-SIZE: 13px
+}
+TD {
+	FONT-SIZE: 13px
+}
+FORM {
+	FONT-SIZE: 12px
+}
+BODY {
+	FONT-SIZE: 12px; BACKGROUND: #B0C3E4; MARGIN: 0px; TEXT-ALIGN: center
+}
+A:link {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #000000; TEXT-DECORATION: none
+}
+A:hover {
+	TEXT-DECORATION: none
+}
+A.link:link {
+	FONT-SIZE: 12px; COLOR: #275b7e; FONT-FAMILY: "simsun"; TEXT-DECORATION: none
+}
+A.link:visited {
+	FONT-SIZE: 12px; COLOR: #275b7e; FONT-FAMILY: "simsun"; TEXT-DECORATION: none
+}
+A.link:hover {
+	FONT-SIZE: 12px; BACKGROUND: #fff; WIDTH: 150px; COLOR: #ff6600; FONT-FAMILY: "simsun"; TEXT-DECORATION: none
+}
+A.menu:link {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: "simsun"; TEXT-DECORATION: none
+}
+A.menu:visited {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: "simsun"; TEXT-DECORATION: none
+}
+A.menu:hover {
+	FONT-SIZE: 12px; COLOR: #ff6600; FONT-FAMILY: "simsun"; TEXT-DECORATION: none
+}
+.bt_style {
+	BORDER-RIGHT: #002d96 1px solid; PADDING-RIGHT: 2px; BORDER-TOP: #002d96 1px solid; PADDING-LEFT: 2px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0,StartColorStr=#FFFFFF, EndColorStr=#9DBCEA); PADDING-BOTTOM: 0px; BORDER-LEFT: #002d96 1px solid; WIDTH: 70px; CURSOR: hand; COLOR: #000; PADDING-TOP: 2px; BORDER-BOTTOM: #002d96 1px solid; HEIGHT: 25px
+}
+.height5 {
+	HEIGHT: 5px
+}
+.sub_menu UL {
+	PADDING-RIGHT: 0px; PADDING-LEFT: 0px; BACKGROUND: #e1eef7; PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-TOP: 0px; BORDER-BOTTOM: #4492c4 1px solid; LIST-STYLE-TYPE: none
+}
+.sub_menu LI {
+	PADDING-RIGHT: 1px; DISPLAY: block; PADDING-LEFT: 1px; PADDING-BOTTOM: 1px; MARGIN: 1px; WIDTH: 100%; LINE-HEIGHT: 17px; PADDING-TOP: 1px; HEIGHT: 20px
+}
+.icon {
+	WIDTH: 16px; HEIGHT: 16px
+}
+.top_menu {
+	BACKGROUND: url(../../img/img0/bg.gif); BORDER-BOTTOM: #4492c4 1px solid; HEIGHT: 25px
+}
+#powered_by {
+	BACKGROUND: #d6dff7; MARGIN: auto; HEIGHT: 50px; TEXT-ALIGN: center
+}
+#powered_by A {
+	COLOR: #000000; TEXT-DECORATION: none
+}

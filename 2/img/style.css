@@ -1,0 +1,24 @@
+body
+{
+	FONT-SIZE: 12px;
+	COLOR: #000000;
+	FONT-FAMILY: "宋体";
+	background-color: #799AE1;
+}
+a  
+{font:normal 12px 宋体; color:#000000; text-decoration:none;}
+a:hover
+{ color: #799AE1}
+TD
+{ font-family:宋体; font-size: 12px; line-height: 15px;}
+submit
+{border: 1px dashed; background-color: #799AE1; border-color: #FFFFFF black black #FFFFFF; height: 20px}
+form
+{ color: #000000; FONT-FAMILY: "宋体"; FONT-SIZE: 9pt; background-color: #799AE1; border:0px;}
+.input
+{ BORDER-BOTTOM: #5E5E4C 1px solid;BORDER-LEFT: #5E5E4C 1px solid; BORDER-RIGHT: #5E5E4C 1px solid; BORDER-TOP: #5E5E4C 1px solid;
+width:150px}
+.button
+{ BORDER-BOTTOM: #5E5E4C 1px solid;BORDER-LEFT: #5E5E4C 1px solid; BORDER-RIGHT: #5E5E4C 1px solid; BORDER-TOP: #5E5E4C 1px solid;
+width:80px}
+ 

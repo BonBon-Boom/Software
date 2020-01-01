@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN" "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+	<!--配置form bean  -->
+	<form-beans>
+		<!-- 配置Collage formbean -->
+		<form-bean name="beanForm"
+			type="com.vanceinfo.school.struts.action.MyForm">
+		</form-bean>
+
+
+		<form-bean name="beanFormTest"
+			type="com.vanceinfo.school.from.FromScore">
+		</form-bean>
+
+		<!-- 学院 -->
+		<form-bean name="CollegeForm"
+			type="com.vanceinfo.school.struts.action.MyForm">
+			<form-property name="professions"
+				type="com.vanceinfo.school.hibernate.pojo.Professions">
+			</form-property>
+		</form-bean>
+
+		<!-- 院系(一个学院下属有多个院系，一个院系下属有多个班级) -->
+		<form-bean name="ProfessionsForm"
+			type="com.vanceinfo.school.struts.action.MyForm">
+			<form-property name="classes"
+				type="com.vanceinfo.school.hibernate.pojo.Classes">
+			</form-property>
+		</form-bean>
+		<form-bean name="MajorForm"
+			type="com.vanceinfo.school.struts.action.MyForm">
+			<form-property name="collage"
+				type="com.vanceinfo.school.hibernate.pojo.Collage">
+			</form-property>
+		</form-bean>
+
+		<!-- 班级(一个班级下属有多个老师，多个学生) -->
+		<form-bean name="ClassesForm"
+			type="com.vanceinfo.school.struts.action.MyForm">
+			<form-property name="student"
+				type="com.vanceinfo.school.hibernate.pojo.Student">
+			</form-property>
+		</form-bean>
+		<form-bean name="TeacherForm"
+			type="com.vanceinfo.school.struts.action.MyForm">
+			<form-property name="teacher"
+				type="com.vanceinfo.school.hibernate.pojo.Teacher">
+			</form-property>
+		</form-bean>
+
+		<!-- 成绩   一个人可学习多门学科 -->
+		<form-bean name="CourseForm"
+			type="com.vanceinfo.school.struts.action.MyForm">
+			<form-property name="course"
+				type="com.vanceinfo.school.hibernate.pojo.Course">
+			</form-property>
+		</form-bean>
+
+		<form-bean name="ScoreForm"
+			type="com.vanceinfo.school.struts.action.MyForm">
+			<form-property name="score"
+				type="com.vanceinfo.school.hibernate.pojo.Score">
+			</form-property>
+		</form-bean>
+
+	</form-beans>
+	<global-exceptions />
+	<global-forwards />
+
+
+
+	<!--配置action mappings -->
+	<action-mappings>
+
+		<!-- 配置学院 -->
+		<action path="/collage/list"
+			type="com.vanceinfo.school.struts.action.CollageAction"
+			parameter="listCollage" scope="request">
+			<forward name="list" path="/collage/showCollage.jsp"></forward>
+		</action>
+		<action path="/collage/add" name="beanForm" validate="false"
+			type="com.vanceinfo.school.struts.action.CollageAction"
+			parameter="addCollage" scope="request">
+			<forward name="add" path="/collage/list.do"></forward>
+		</action>
+		<action path="/collage/delete"
+			type="com.vanceinfo.school.struts.action.CollageAction"
+			parameter="deleteCollage" scope="request">
+			<forward name="delete" path="/collage/list.do"></forward>
+		</action>
+		<action path="/collage/toEdit"
+			type="com.vanceinfo.school.struts.action.CollageAction"
+			parameter="toEditCollage" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok" path="/collage/editCollage.jsp"></forward>
+		</action>
+		<action path="/collage/edit" name="beanForm"
+			attribute="collageUpdateForm" validate="false"
+			type="com.vanceinfo.school.struts.action.CollageAction"
+			parameter="editCollage" scope="request">
+			<forward name="edit" path="/collage/list.do"></forward>
+		</action>
+
+
+		<!-- 配置管理员 -->
+		<action path="/admin/list"
+			type="com.vanceinfo.school.struts.action.AdminAction"
+			parameter="listAdmin" scope="request">
+			<forward name="list" path="/admin/showAdmin.jsp"></forward>
+		</action>
+		<action path="/admin/add" name="beanForm" validate="false"
+			type="com.vanceinfo.school.struts.action.AdminAction"
+			parameter="addAdmin" scope="request">
+			<forward name="add" path="/admin/list.do"></forward>
+		</action>
+		<action path="/admin/delete"
+			type="com.vanceinfo.school.struts.action.AdminAction"
+			parameter="deleteAdmin" scope="request">
+			<forward name="delete" path="/admin/list.do"></forward>
+		</action>
+		<!-- 管理员CA PUBLICKEY 生成 -->
+		<action path="/admin/toCreateCA"
+			type="com.vanceinfo.school.struts.action.AdminAction"
+			parameter="toCreateCA" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok" path="/admin/createCA.jsp"></forward>
+			<forward name="error" path="/admin/error.jsp"></forward>
+		</action>
+		<action path="/admin/createCA" name="beanForm"
+			attribute="adminUpdateForm" validate="false"
+			type="com.vanceinfo.school.struts.action.AdminAction"
+			parameter="createCA" scope="request">
+			<forward name="error" path="/admin/error.jsp"></forward>
+		</action>
+		<action path="/admin/listAdminCA"
+			type="com.vanceinfo.school.struts.action.AdminAction"
+			parameter="listAdminCA" scope="request">
+			<forward name="list" path="/admin/error.jsp"></forward>
+		</action>
+		
+		<action path="/admin/toEdit"
+			type="com.vanceinfo.school.struts.action.AdminAction"
+			parameter="toEditAdmin" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok" path="/admin/editAdmin.jsp"></forward>
+		</action>
+		<action path="/admin/edit" name="beanForm"
+			attribute="adminUpdateForm" validate="false"
+			type="com.vanceinfo.school.struts.action.AdminAction"
+			parameter="editAdmin" scope="request">
+			<forward name="edit" path="/admin/list.do"></forward>
+		</action>
+		<action path="/loginCheck" name="beanForm" validate="false"
+			type="com.vanceinfo.school.struts.action.AdminAction"
+			parameter="loginCheck" scope="request">
+			<forward name="loginSuccess" path="/index.jsp"></forward>
+			<forward name="loginFailue" path="/login.jsp"></forward>
+			<forward name="teacherSuccess" path="/indexTeacher.jsp"></forward>
+			<forward name="studentSuccess" path="/indexStudent.jsp"></forward>
+		</action>
+
+
+
+
+
+		<!-- 配置专业 -->
+		<action path="/professions/list"
+			type="com.vanceinfo.school.struts.action.ProfessionsAction"
+			parameter="listProfessions" scope="request">
+			<forward name="list"
+				path="/professions/showProfessions.jsp">
+			</forward>
+		</action>
+		<!-- 添加专业 -->
+		<action path="/professions/add" name="MajorForm"
+			validate="false"
+			type="com.vanceinfo.school.struts.action.ProfessionsAction"
+			parameter="addProfessions" scope="request">
+			<forward name="add" path="/professions/list.do"></forward>
+		</action>
+		<action path="/professions/toAdd" validate="false"
+			type="com.vanceinfo.school.struts.action.ProfessionsAction"
+			parameter="toAdd" scope="request">
+			<forward name="ok" path="/professions/add.jsp"></forward>
+		</action>
+	    <!-- 删除专业 -->
+		<action path="/professions/delete"
+			type="com.vanceinfo.school.struts.action.ProfessionsAction"
+			parameter="deleteProfessions" scope="request">
+			<forward name="delete" path="/professions/list.do"></forward>
+		</action>
+		
+		
+		
+		
+		
+		
+		
+
+
+		<!-- 配置班级 -->
+		<action path="/classes/list"
+			type="com.vanceinfo.school.struts.action.ClassesAction"
+			parameter="listClasses" scope="request">
+			<forward name="list" path="/classes/showClasses.jsp"></forward>
+		</action>
+		<action path="/classes/add" name="CollegeForm" validate="false"
+			type="com.vanceinfo.school.struts.action.ClassesAction"
+			parameter="addClasses" scope="request">
+			<forward name="add" path="/classes/list.do"></forward>
+		</action>
+		<action path="/classes/toAdd" validate="false"
+			type="com.vanceinfo.school.struts.action.ClassesAction"
+			parameter="toAdd" scope="request">
+			<forward name="ok" path="/classes/add.jsp"></forward>
+		</action>
+        <!-- 删除班级 -->
+		<action path="/classes/delete"
+			type="com.vanceinfo.school.struts.action.ClassesAction"
+			parameter="deleteClasses" scope="request">
+			<forward name="delete" path="/classes/list.do"></forward>
+		</action>
+		
+		
+		
+		
+
+
+
+		<!-- 配置课程 -->
+		<action path="/course/list"
+			type="com.vanceinfo.school.struts.action.CourseAction"
+			parameter="listCourse" scope="request">
+			<forward name="list" path="/course/showCourse.jsp">
+			</forward>
+		</action>
+		<action path="/course/add" name="TeacherForm" validate="false"
+			type="com.vanceinfo.school.struts.action.CourseAction"
+			parameter="addCourse" scope="request">
+			<forward name="add" path="/course/list.do"></forward>
+		</action>
+		<action path="/course/toAdd" validate="false"
+			type="com.vanceinfo.school.struts.action.CourseAction"
+			parameter="toAdd" scope="request">
+			<forward name="ok" path="/course/addCourse.jsp"></forward>
+		</action>
+        <!-- 删除课程 -->
+		<action path="/course/delete"
+			type="com.vanceinfo.school.struts.action.CourseAction"
+			parameter="deleteCourse" scope="request">
+			<forward name="delete" path="/course/list.do"></forward>
+		</action>
+		<!-- 添加课程表  排课计划 -->
+	    <action path="/course/addCourseArrange"  validate="false" 
+			type="com.vanceinfo.school.struts.action.CourseAction"
+			parameter="addCourseArrange" scope="request">
+			<forward name="addCourseArrange" path="/courseArrange/list.do"></forward>
+		</action>
+		<!-- 修改课程表 -->
+		<action path="/course/toEdit"
+			type="com.vanceinfo.school.struts.action.CourseAction"
+			parameter="toEdit" scope="request" name="beanForm"
+			validate="false">
+			<forward name="toEdit" path="/course/editCourseArrange.jsp"></forward>
+		</action>
+		<action path="/course/editCourseArrange" name="beanForm" validate="false"
+			type="com.vanceinfo.school.struts.action.CourseAction"
+			parameter="editCourseArrange" scope="request">
+			<forward name="editCourseArrange" path="/courseArrange/list.do"></forward>
+		</action>	
+		<action path="/course/delCourseArrange" name="beanForm" validate="false"
+			type="com.vanceinfo.school.struts.action.CourseAction"
+			parameter="delCourseArrange" scope="request">
+			<forward name="delCourseArrange" path="/courseArrange/list.do"></forward>
+		</action>	
+				
+		
+
+
+
+		<!-- 老师添加课程表计划 -->
+ 
+		<action path="/courseArrange/list"
+			type="com.vanceinfo.school.struts.action.CourseArrangeAction"
+			parameter="listCourseArrange" scope="request">
+			<forward name="list" path="/course/showCourseArrange.jsp">
+			</forward>
+		</action>
+
+
+
+
+
+
+
+
+		<!-- 配置教师 -->
+		<action path="/teacher/list"
+			type="com.vanceinfo.school.struts.action.TeacherAction"
+			parameter="listTeacher" scope="request">
+			<forward name="list" path="/teacher/showTeacher.jsp"></forward>
+		</action>
+		<action path="/teacher/add" name="beanForm" validate="false"
+			type="com.vanceinfo.school.struts.action.TeacherAction"
+			parameter="addTeacher" scope="request">
+			<forward name="add" path="/teacher/list.do"></forward>
+		</action>
+		<!-- 教师修改密码 -->
+		<action path="/teacher/toEdit"
+			type="com.vanceinfo.school.struts.action.TeacherAction"
+			parameter="toEdit" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok" path="/teacher/editTeacher.jsp"></forward>
+		</action>
+		<action path="/teacher/edit" name="beanForm"
+			attribute="teacherUpdateForm" validate="false"
+			type="com.vanceinfo.school.struts.action.TeacherAction"
+			parameter="editTeacher" scope="request">
+			<forward name="edit" path="/teacher/changePsw1.do"></forward>
+		</action>
+		<!-- 修改教师资料 -->
+	   <action path="/teacher/toEdit1"
+			type="com.vanceinfo.school.struts.action.TeacherAction"
+			parameter="toEdit1" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok1" path="/teacher/editTeacher1.jsp"></forward>
+		</action>
+		<action path="/teacher/edit1" name="beanForm"
+			attribute="teacherUpdateForm1" validate="false"
+			type="com.vanceinfo.school.struts.action.TeacherAction"
+			parameter="editTeacher1" scope="request">
+			<forward name="edit1" path="/teacher/list.do"></forward>
+		</action>
+		<action path="/teacher/changePsw1"
+			type="com.vanceinfo.school.struts.action.TeacherAction"
+			parameter="changePsw1" scope="request">
+			<forward name="changePsw1"
+				path="/teacher/showTeacher1.jsp">
+			</forward>
+		</action>
+        <!-- 删除教师 -->
+		<action path="/teacher/delete"
+			type="com.vanceinfo.school.struts.action.TeacherAction"
+			parameter="deleteTeacher" scope="request">
+			<forward name="delete" path="/teacher/list.do"></forward>
+		</action>
+
+
+
+
+
+
+
+		<!-- 配置成绩-->
+		<!-- 查询出所有的成绩 供老师使用 -->
+		<action path="/score/list"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="listScore" scope="request">
+			<forward name="list" path="/score/showScore.jsp"></forward>
+		</action>
+		<!-- 查询学生成绩 供学生使用 -->
+		<action path="/score/listSelf"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="listSelfScore" scope="request">
+			<forward name="listSelf"
+				path="/score/showScoreStudent.jsp">
+			</forward>
+		</action>
+
+		<!-- 查询学生成绩 供学生查看当前所选课程老师的审核状态 -->
+		<action path="/score/listSelf1"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="listSelfScore1" scope="request">
+			<forward name="listSelf1"
+				path="/score/showScoreStudent1.jsp">
+			</forward>
+		</action>
+		<!-- 老师对学生选课进行审核 -->
+		<action path="/score/shenhe"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="shenhe" scope="request">
+			<forward name="shenhe" path="/score/list.do"></forward>
+		</action>
+		<!-- 课程评分 供老师使用 -->
+		<action path="/score/pinfen"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="pinfen" scope="request">
+			<forward name="pinfen" path="/score/showScorePinfen.jsp"></forward>
+		</action>
+		<!-- 课程评分查看 供学员查看老师给自己的评分 -->
+		<action path="/score/pinfen1"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="pinfen1" scope="request">
+			<forward name="pinfen1"
+				path="/score/showScorePinfen1.jsp">
+			</forward>
+		</action>
+		<action path="/score/toEdit"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="toEdit" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok" path="/score/editScore.jsp"></forward>
+		</action>
+		<!-- 签名确认成绩连接 -->
+		<action path="/score/toConfirmScore"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="toConfirmScore" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok" path="/score/confirmScore.jsp"></forward>
+			
+		</action>
+		<!-- 签名确认成绩 -->
+		<action path="/score/confirmScore" name="beanForm"
+			attribute="scoreUpdateForm" validate="false"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="confirmScore" scope="request">
+			<forward name="edit" path="/score/pinfen.do"></forward>
+			<forward name="error" path="/score/error.jsp"></forward>
+		</action>
+		<action path="/score/edit" name="beanForm"
+			attribute="scoreUpdateForm" validate="false"
+			type="com.vanceinfo.school.struts.action.ScoreAction"
+			parameter="editScore" scope="request">
+			<forward name="edit" path="/score/pinfen.do"></forward>
+		</action>
+
+
+
+
+
+
+		<!-- 配置学生 -->
+		<action path="/student/list"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="listStudent" scope="request">
+			<forward name="list" path="/student/showStudent.jsp"></forward>
+		</action>
+		<action path="/student/changePsw"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="changePsw" scope="request">
+			<forward name="changePsw"
+				path="/student/showStudent1.jsp">
+			</forward>
+		</action>
+
+		<action path="/student/add" name="ProfessionsForm"
+			validate="false"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="addStudent" scope="request">
+			<forward name="add" path="/student/list.do"></forward>
+		</action>
+		<action path="/student/toAdd" validate="false"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="toAdd" scope="request">
+			<forward name="ok" path="/student/student.jsp"></forward>
+		</action>
+		<!-- 学生修改密码 -->
+		<action path="/student/toEdit"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="toEdit" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok" path="/student/editStudent.jsp"></forward>
+		</action>
+		<action path="/student/edit" name="beanForm"
+			attribute="studentUpdateForm" validate="false"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="editStudent" scope="request">
+			<forward name="edit" path="/student/changePsw.do"></forward>
+		</action>
+		<!-- 学生修改个人资料 -->
+		<action path="/student/toEdit1"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="toEdit1" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok1" path="/student/editStudent1.jsp"></forward>
+		</action>
+		<action path="/student/edit1" name="beanForm"
+			attribute="studentUpdateForm1" validate="false"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="editStudent1" scope="request">
+			<forward name="edit1" path="/student/list.do"></forward>
+		</action>
+		<!-- 学生选课 -->
+		<action path="/student/choose" name="beanFormTest"
+			validate="false"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="choose" scope="request">
+			<forward name="choose" path="/score/listSelf1.do"></forward>
+		</action>
+		<!-- 删除学生-->
+		<action path="/student/delete"
+			type="com.vanceinfo.school.struts.action.StudentAction"
+			parameter="deleteStudent" scope="request">
+			<forward name="delete" path="/student/list.do"></forward>
+		</action> 
+
+
+
+
+		<!-- 配置公告 -->
+		<action path="/notice/list"
+			type="com.vanceinfo.school.struts.action.NoticeAction"
+			parameter="listNotice" scope="request">
+			<forward name="list" path="/notice/showNotice.jsp"></forward>
+		</action>
+		<action path="/notice/add" name="beanForm" validate="false"
+			type="com.vanceinfo.school.struts.action.NoticeAction"
+			parameter="addNotice" scope="request">
+			<forward name="add" path="/notice/list.do"></forward>
+		</action>
+		<action path="/notice/delete"
+			type="com.vanceinfo.school.struts.action.NoticeAction"
+			parameter="deleteNotice" scope="request">
+			<forward name="delete" path="/notice/list.do"></forward>
+		</action>
+		<action path="/notice/toEdit"
+			type="com.vanceinfo.school.struts.action.NoticeAction"
+			parameter="toEditNotice" scope="request" name="beanForm"
+			validate="false">
+			<forward name="ok" path="/notice/editNotice.jsp"></forward>
+		</action>
+		<action path="/notice/edit" name="beanForm"
+			attribute="noticeUpdateForm" validate="false"
+			type="com.vanceinfo.school.struts.action.NoticeAction"
+			parameter="editNotice" scope="request">
+			<forward name="edit" path="/notice/list.do"></forward>
+		</action>
+
+
+
+
+
+	</action-mappings>
+	<message-resources
+		parameter="com.yourcompany.struts.ApplicationResources" />
+</struts-config>
+

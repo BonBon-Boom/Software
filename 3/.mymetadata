@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="scms_project"
+  id="myeclipse.1240807328546"
+  context-root="/scms_project"
+  j2ee-spec="5.0"
+  archive="scms_project.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
